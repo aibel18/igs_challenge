@@ -10,6 +10,8 @@ project("igs_challange" LANGUAGES C)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin" CACHE PATH "" FORCE)
 
+add_definitions(-DDATA_PATH="${CMAKE_SOURCE_DIR}/data/")
+
 # --------------------------------------------------------------
 # project structure
 # --------------------------------------------------------------

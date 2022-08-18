@@ -1,6 +1,12 @@
 #include "Palindrome.h"
+
 #include <stdbool.h>
 #include <stdio.h>
+#include <string.h>
+
+#ifndef DATA_PATH
+#define DATA_PATH "/"
+#endif
 
 int palindrome_major(char* str) {
 
@@ -24,7 +30,7 @@ int palindrome_major(char* str) {
 	}
 
 	// if exist odd number of letter: using one letter for the center position
-	if (have_odd)
+	if (count && have_odd)
 		count++;
 
 	return count;
@@ -32,11 +38,25 @@ int palindrome_major(char* str) {
 
 int main() {
 
-	char str[] = "asdoromametemamorfdf";
+	char file_path[] = DATA_PATH;
+	strcat(file_path, "arquivo.txt");
 
-	int rpta = palindrome_major(str);
+	FILE* file = fopen(file_path, "r+");
 
-	printf("str1 is %i\n", rpta);
+	if (file == NULL) {
+		printf("file no exits \n");
+		return -1;
+	}
+
+	int bufferLength = 255;
+	char buffer[bufferLength];
+
+	while (fgets(buffer, bufferLength, file)) {
+		int rpta = palindrome_major(buffer);
+		printf("palidrome major is: %i\n", rpta);
+	}
+
+	fclose(file);
 
 	return 0;
 }
