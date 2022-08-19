@@ -16,9 +16,14 @@
 ```
 mkdir build
 cd build
-make ..
+cmake ..
+make
 ```
 ### Run
 ```
 ./bin/problem_one
+./bin/problem_two
+./bin/problem_three
+./bin/problem_four
+./bin/problem_five
 ```
