@@ -18,6 +18,6 @@ void printList(ListNode* list);
 
 ListNode* mergeTwoList(ListNode* list1, ListNode* list2);
 
-ListNode* mergeKLists(ListNode** listas, int listasSize);
+ListNode* mergeKLists(ListNode** lists, int listsSize);
 
 #endif

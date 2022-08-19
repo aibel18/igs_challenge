@@ -46,20 +46,55 @@ void deleteList(ListNode* list) {
 	}
 }
 
-struct ListNode* mergeTwoList(struct ListNode* list1, struct ListNode* list2) {
-	return 0;
+ListNode* mergeTwoList(ListNode* list1, ListNode* list2) {
+	ListNode* result = NULL;
+
+	// base cases
+	if (list1 == NULL)
+		return (list2);
+	else if (list2 == NULL)
+		return (list1);
+
+	// pick either list1 or list2
+	if (list1->data <= list2->data) {
+		result = list1;
+		result->next = mergeTwoList(list1->next, list2);
+	} else {
+		result = list2;
+		result->next = mergeTwoList(list1, list2->next);
+	}
+	return result;
+}
+
+ListNode* mergeKLists(ListNode** lists, int listsSize) {
+
+	ListNode* list1 = lists[0];
+
+	for (int i = 1; i < listsSize; i++) {
+
+		mergeTwoList(list1, lists[i]);
+	}
+
+	return list1;
 }
 
 int main() {
 
-	int array[] = {1, 1, 3, 3, 6, 8, 8, 9};
-	int size = sizeof(array) / sizeof(int);
+	int a1[] = {1, 3, 8};
+	int a2[] = {1, 3, 6};
+	int a3[] = {8, 9};
 
-	ListNode* list = createList(array, size);
+	ListNode* lists[3];
 
-	printList(list);
+	lists[0] = createList(a1, sizeof(a1) / sizeof(int));
+	lists[1] = createList(a2, sizeof(a2) / sizeof(int));
+	lists[2] = createList(a3, sizeof(a3) / sizeof(int));
 
-	deleteList(list);
+	ListNode* rpta = mergeKLists(lists, 3);
+
+	printList(rpta);
+
+	deleteList(rpta);
 
 	return 0;
 }
