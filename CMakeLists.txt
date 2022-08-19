@@ -36,9 +36,9 @@ add_executable(problem_three ${PROBLEM_THREE})
 
 # PROBLEM FOUR
 # sources & headers
-file(GLOB_RECURSE PROBLEM_FOUR)
+file(GLOB_RECURSE PROBLEM_FOUR src/MergeList.c src/MergeList.h)
 # executable
-# add_executable(problem_four ${PROBLEM_FOUR})
+add_executable(problem_four ${PROBLEM_FOUR})
 
 # PROBLEM FIVE
 # sources & headers
