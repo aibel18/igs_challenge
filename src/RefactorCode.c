@@ -1,54 +1,65 @@
 #include <stdio.h>
 #include <stdlib.h>
+
 #define LINHAS 3
 #define COLUNAS 5
+
 int **cria_slot(int **slot) {
-	int col;
-	int line;
-	line = 0;
-	slot = malloc(sizeof(int *) * 3);
-	while (line < 3) slot[line++] = malloc(sizeof(int));
-	line = 0;
-	col = 0;
-	while (line < 3) {
+
+	slot = malloc(sizeof(int *) * LINHAS);
+
+	for (int line = 0; line < LINHAS; line++) {
+		slot[line] = malloc(sizeof(int) * COLUNAS);
+	}
+
+	for (int line = 0; line < LINHAS; line++) {
 		printf("Insira os valores da linha %d:\n", (line + 1));
-		while (col < 5) {
+		for (int col = 0; col < COLUNAS; col++) {
 			scanf("%d", &slot[line][col]);
-			col++;
 		}
-		col = 0;
-		line++;
 	}
 	return (slot);
 }
+
+int verificaPremio(int line, int **slot, int premio[LINHAS][COLUNAS]) {
+	int count_prize = 0;
+
+	for (int col = 0; col < COLUNAS; col++) {
+		if (slot[line][col] == premio[line][col])
+			count_prize++;
+	}
+	return count_prize;
+}
+
+void cleanSlot(int **slot) {
+	int line = 0;
+	while (line < LINHAS)
+		free(slot[line++]);
+	free(slot);
+}
+
 int main(void) {
+
 	int premio[LINHAS][COLUNAS] = {{1, 0, 0, 0, 1}, {0, 1, 0, 1, 0}, {0, 0, 1, 0, 0}};
+
 	int **slot = 0;
 	int lines = 0;
-	int cols = 0;
+
 	slot = cria_slot(slot);
-	int comp = slot[0][0];
-	int count_prize = 0;
-	while (lines < 3 && count_prize != 5) {
-		while (cols < 5) {
-			if (comp == slot[lines][cols] && premio[lines][cols]) {
-				count_prize++;
-			}
-			cols++;
-		}
-		cols = 0;
-		lines++;
-		if (lines == 3 && count_prize != 5) {
-			lines = 0;
-			while (lines < 3) free(slot[lines++]);
-			free(slot);
-			lines = 0;
-			cols = 0;
-			count_prize = 0;
+
+	while (lines < LINHAS) {
+
+		if (verificaPremio(lines, slot, premio) == COLUNAS)
+			break;
+
+		if (++lines == LINHAS) {
+			cleanSlot(slot);
 			slot = cria_slot(slot);
-			comp = slot[0][0];
+			lines = 0;
 		}
 	}
+	
+	cleanSlot(slot);
 	printf("Gahnou!\n");
 	return (0);
 }
