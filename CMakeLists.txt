@@ -30,9 +30,9 @@ add_executable(problem_two ${PROBLEM_TWO})
 
 # PROBLEM THREE
 # sources & headers
-file(GLOB_RECURSE PROBLEM_THREE)
+file(GLOB_RECURSE PROBLEM_THREE src/PrintColor.c src/PrintColor.h)
 # executable
-# add_executable(problem_three ${PROBLEM_THREE})
+add_executable(problem_three ${PROBLEM_THREE})
 
 # PROBLEM FOUR
 # sources & headers
