@@ -24,9 +24,9 @@ add_executable(problem_one ${PROBLEM_ONE})
 
 # PROBLEM TWO
 # sources & headers
-file(GLOB_RECURSE PROBLEM_TWO)
+file(GLOB_RECURSE PROBLEM_TWO src/RomanNumber.c src/RomanNumber.h)
 # executable
-# add_executable(problem_two ${PROBLEM_TWO})
+add_executable(problem_two ${PROBLEM_TWO})
 
 # PROBLEM THREE
 # sources & headers
