@@ -42,6 +42,6 @@ add_executable(problem_four ${PROBLEM_FOUR})
 
 # PROBLEM FIVE
 # sources & headers
-file(GLOB_RECURSE PROBLEM_FIVE)
+file(GLOB_RECURSE PROBLEM_FIVE src/RefactorCode.c)
 # executable
-# add_executable(problem_five ${PROBLEM_FIVE})
+add_executable(problem_five ${PROBLEM_FIVE})
